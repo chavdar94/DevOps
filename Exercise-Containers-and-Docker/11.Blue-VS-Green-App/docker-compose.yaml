@@ -2,6 +2,7 @@ version: '3.8'
 services:
     vote:
         container_name: vote
+        command: gunicorn -w 4 -b 0.0.0.0 vote:app
         build:
             dockerfile: ./vote/Dockerfile
         ports:
