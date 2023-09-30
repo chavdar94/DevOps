@@ -12,3 +12,16 @@
 8. Run the docker-compose.yaml file in the context `docker compose up -d`
 
 - Might need to create a `Storage account` in Azure or define it in the `docker-compose.yaml` file.
+
+```
+services:
+    app:
+        volumes:
+            - {volume name}:{path in container}
+volumes:
+    {volume name}:
+        driver: azure_file
+        driver_opts:
+            share_name: {custom name}
+            storage_account_name: {storage account name}
+```
