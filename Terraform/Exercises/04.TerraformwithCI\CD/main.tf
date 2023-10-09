@@ -5,6 +5,13 @@ terraform {
       version = "~>3.75.0"
     }
   }
+
+  backend "azurerm" {
+    resource_group_name = "StorageRGChoko"
+    storage_account_name = "taskboardstorage"
+    container_name = "taskboardcontainer"
+    key = "terraform.tfstate"
+  }
 }
 
 provider "azurerm" {
@@ -18,7 +25,7 @@ resource "random_integer" "ri" {
 
 
 resource "azurerm_resource_group" "rg" {
-  name     = "${var.app_service_name}${random_integer.ri.result}"
+  name     = "${var.resource_group_name}${random_integer.ri.result}"
   location = var.resource_group_location
 }
 
@@ -50,13 +57,13 @@ resource "azurerm_linux_web_app" "appservice" {
   }
 }
 
-resource "azurerm_storage_account" "TaskBoardSA" {
-  name                     = "taskboardsa${random_integer.ri.result}"
-  resource_group_name      = azurerm_resource_group.rg.name
-  location                 = azurerm_resource_group.rg.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-}
+# resource "azurerm_storage_account" "TaskBoardSA" {
+#   name                     = "taskboardsa${random_integer.ri.result}"
+#   resource_group_name      = azurerm_resource_group.rg.name
+#   location                 = azurerm_resource_group.rg.location
+#   account_tier             = "Standard"
+#   account_replication_type = "LRS"
+# }
 
 resource "azurerm_mssql_server" "sqlserver" {
   name                         = "${var.sql_server_name}-${random_integer.ri.result}"

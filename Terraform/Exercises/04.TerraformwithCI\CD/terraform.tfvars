@@ -1,4 +1,4 @@
-resource_group_name     = "TaskBoardRG"
+resource_group_name     = "TaskBoardChoko"
 resource_group_location = "North Europe"
 app_service_plan_name   = "task-board-plan"
 app_service_name        = "task-board"
