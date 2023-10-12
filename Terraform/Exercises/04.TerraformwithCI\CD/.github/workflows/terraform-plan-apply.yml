@@ -49,7 +49,7 @@ jobs:
             # Generates an execution plan for Terraform
             - name: Terraform Plan
               id: tf-plan
-              run: terraform plan -out tfplan
+              run: terraform plan -out=tfplan.out
 
             # Save plan to artifacts
             - name: Save Plan
@@ -57,6 +57,7 @@ jobs:
               with:
                   name: tfplan
                   path: tfplan
+
     terrafom-apply:
         name: 'Terraform Apply'
         runs-on: ubuntu-latest
@@ -80,8 +81,7 @@ jobs:
               uses: actions/download-artifact@v3
               with:
                   name: tfplan
-                  path: ${{ github.workspace }}
 
             # Terraform apply
             - name: Terraform Apply
-              run: terraform apply -auto-approve ${{ github.workspace }}/tfplan
+              run: terraform apply -auto-approve tfplan
