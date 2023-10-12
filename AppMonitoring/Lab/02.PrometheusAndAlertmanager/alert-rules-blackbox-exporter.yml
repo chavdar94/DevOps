@@ -7,4 +7,4 @@ groups:
             labels:
                 severity: warning
             annotations:
-                summary: 'Connection toom more than 2.5 milliseconds'
+                summary: 'Connection took more than 2.5 milliseconds'
